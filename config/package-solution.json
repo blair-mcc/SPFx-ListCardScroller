@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "sp-list-card-scroller-client-side-solution",
+    "id": "d634feda-9147-482f-bafd-4ad3e45f6ab8",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.21.1"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "SPListCardScroller description"
+      },
+      "longDescription": {
+        "default": "SPListCardScroller description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "sp-list-card-scroller Feature",
+        "description": "The feature that activates elements of the sp-list-card-scroller solution.",
+        "id": "81cddd86-a929-4419-a72b-0462d10a99e9",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/sp-list-card-scroller.sppkg"
+  }
+}

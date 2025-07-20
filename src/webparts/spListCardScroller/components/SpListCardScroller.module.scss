@@ -1,0 +1,117 @@
+.card {
+  background: #fff;
+  border-radius: 8px;
+  border-top: 4px solid var(--themePrimary);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 10px;
+  margin: 0 12px;
+  width: 260px;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+
+.cardTitle {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--themePrimary); //SharePoint site theme
+  margin-bottom: 12px;
+  border-bottom: 2px solid #e5e5e5;
+  padding-bottom: 4px;
+  background-color: #f3f2f1;
+  border-radius: 4px;
+  padding: 8px 12px;
+  text-align: center;
+}
+
+.cardDetails {
+  flex-grow: 1;
+}
+
+.cardRow {
+  margin-bottom: 8px;
+}
+
+.cardLabel {
+  font-weight: 600;
+  margin-right: 4px;
+  display: inline-block;
+}
+
+.cardValue {
+  color: #333;
+}
+
+.cardFooter {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.footerDate {
+  font-weight: 600;
+  color: var(--themePrimary); //SharePoint site theme
+}
+
+.cardContainer {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  padding-bottom: 16px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+
+.cardContainer::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+.cardContainer {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 16px 0;
+  flex: 1;
+}
+
+.carouselWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.scrollButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  font-size: 18px;
+  cursor: pointer;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scrollButton:hover {
+  background: #eaeaea;
+}
+
+.scrollButtonLeft {
+  left: -16px;
+}
+
+.scrollButtonRight {
+  right: -16px;
+}

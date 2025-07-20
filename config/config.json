@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "sp-list-card-scroller-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/spListCardScroller/SpListCardScrollerWebPart.js",
+          "manifest": "./src/webparts/spListCardScroller/SpListCardScrollerWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "SpListCardScrollerWebPartStrings": "lib/webparts/spListCardScroller/loc/{locale}.js"
+  }
+}
