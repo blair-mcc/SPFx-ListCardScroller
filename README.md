@@ -1,8 +1,8 @@
-# sp-list-card-scroller
+# SharePoint List - Card Scroller
 
 ## Summary
 
-Short summary on functionality and used technologies.
+This custom SPFx Component turns any list into a simple card viewer in SharePoint without having to create and mess around with a gallery view on the list. It allows for minimal customisation in the fields selected, title field, as many description fields as you'd like, a footer and an optional image field. It uses a custom Property Pane Control (PropertyPaneFieldReorderableList) that allows for multi select and re-ordering.
 
 [picture of the solution in action, if possible]
 
@@ -15,11 +15,10 @@ Short summary on functionality and used technologies.
 - [SharePoint Framework](https://aka.ms/spfx)
 - [Microsoft 365 tenant](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-developer-tenant)
 
-> Get your own free development tenant by subscribing to [Microsoft 365 developer program](http://aka.ms/o365devprogram)
 
 ## Prerequisites
 
-> Any special pre-requisites?
+> A SharePoint List with a minimum of 3 fields in it.
 
 ## Solution
 
@@ -29,10 +28,9 @@ Short summary on functionality and used technologies.
 
 ## Version history
 
-| Version | Date             | Comments        |
-| ------- | ---------------- | --------------- |
-| 1.1     | March 10, 2021   | Update comment  |
-| 1.0     | January 29, 2021 | Initial release |
+| Version | Date           | Comments        |
+| ------- | ---------------| --------------- |
+| 1.0     | July 21st 2025 | Initial release |
 
 ## Disclaimer
 
