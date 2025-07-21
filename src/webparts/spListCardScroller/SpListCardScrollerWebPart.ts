@@ -10,10 +10,11 @@ import { ThemeProvider, ThemeChangedEventArgs } from '@microsoft/sp-component-ba
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { ListCardScroller, IListCardScrollerProps } from './components/SpListCardScroller';
-import { getSP } from '../../pnpjsConfig';
+import { getSP, initSP } from '../../pnpjsConfig';
 import { PropertyPaneFieldReorderableList } from '../../propertyPaneControls/PropertyPaneFieldReorderableList/PropertyPaneFieldReorderableList';
 export interface IListCardScrollerWebPartProps {
   listTitle: string;
+  viewName: string;
   titleField: string;
   descriptionFields: string[];
   footerField: string;
@@ -23,6 +24,7 @@ export interface IListCardScrollerWebPartProps {
 export default class ListCardScrollerWebPart extends BaseClientSideWebPart<IListCardScrollerWebPartProps> {
   private _listOptions: IPropertyPaneDropdownOption[] = [];
   private _fieldOptions: IPropertyPaneDropdownOption[] = [];
+  private _viewOptions: IPropertyPaneDropdownOption[] = [];
   private _themeProvider: ThemeProvider;
   private _themeVariant: IReadonlyTheme | undefined;
 
@@ -31,27 +33,45 @@ export default class ListCardScrollerWebPart extends BaseClientSideWebPart<IList
 
     this._themeProvider = this.context.serviceScope.consume(ThemeProvider.serviceKey);
     this._themeVariant = this._themeProvider.tryGetTheme();
-
     this._themeProvider.themeChangedEvent.add(this, this._handleThemeChanged);
 
-    getSP(this.context);
+    initSP(this.context);
     await this._loadLists();
 
     if (this.properties.listTitle) {
       await this._loadFields(this.properties.listTitle);
+      await this._loadViews(this.properties.listTitle);
+
+      // Only reset if all fields are empty (first-time setup)
+      const isFirstTime = !this.properties.titleField && !this.properties.footerField && (!this.properties.descriptionFields || this.properties.descriptionFields.length === 0);
+      if (isFirstTime) {
+        this.properties.titleField = '';
+        this.properties.descriptionFields = [];
+        this.properties.footerField = '';
+        this.properties.viewName = '';
+      }
     }
   }
 
 
+
   public render(): void {
+    const fieldLabels = this._fieldOptions.reduce((map, option) => {
+      map[option.key as string] = option.text;
+      return map;
+    }, {} as Record<string, string>);
+
     const element: React.ReactElement<IListCardScrollerProps> = React.createElement(
       ListCardScroller,
       {
         siteUrl: this.context.pageContext.web.absoluteUrl,
         listTitle: this.properties.listTitle,
+        viewName: this.properties.viewName,
         titleField: this.properties.titleField,
         descriptionFields: this.properties.descriptionFields,
         footerField: this.properties.footerField,
+        fieldLabels: fieldLabels,
+        imageField: this.properties.imageField,
         theme: this._themeVariant
       }
     );
@@ -67,6 +87,16 @@ export default class ListCardScrollerWebPart extends BaseClientSideWebPart<IList
     return Version.parse('1.0');
   }
 
+  protected get disableReactivePropertyChanges(): boolean {
+    return true;
+  }
+
+  protected onAfterPropertyPaneChangesApplied(): void {
+    this.render();
+  }
+
+
+
   public getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
     return {
       pages: [
@@ -80,8 +110,16 @@ export default class ListCardScrollerWebPart extends BaseClientSideWebPart<IList
                   label: 'Select List',
                   options: this._listOptions
                 }),
+                PropertyPaneDropdown('viewName', {
+                  label: 'Select View',
+                  options: this._viewOptions
+                }),
                 PropertyPaneDropdown('titleField', {
                   label: 'Title Field',
+                  options: this._fieldOptions
+                }),
+                PropertyPaneDropdown('imageField', {
+                  label: 'Image Field',
                   options: this._fieldOptions
                 }),
                 PropertyPaneFieldReorderableList('descriptionFields', {
@@ -125,6 +163,19 @@ export default class ListCardScrollerWebPart extends BaseClientSideWebPart<IList
     }));
   }
 
+  private async _loadViews(listTitle: string): Promise<void> {
+  const sp = getSP();
+  const views = await sp.web.lists.getByTitle(listTitle).views();
+
+  this._viewOptions = views
+    .filter((view: { Hidden: any; }) => !view.Hidden)
+    .map((view: { Title: any; }) => ({
+      key: view.Title,
+      text: view.Title
+    }));
+}
+
+
     private _onPropertyPaneChange(propertyPath: string, newValue: string[]): void {
         this.properties[propertyPath] = newValue;
     }
@@ -134,8 +185,10 @@ export default class ListCardScrollerWebPart extends BaseClientSideWebPart<IList
             this.properties.titleField = '';
             this.properties.footerField = '';
             this.properties.descriptionFields = [];
+            this.properties.viewName = '';
 
             await this._loadFields(newValue);
+            await this._loadViews(newValue)
             this.context.propertyPane.refresh();
         }
 

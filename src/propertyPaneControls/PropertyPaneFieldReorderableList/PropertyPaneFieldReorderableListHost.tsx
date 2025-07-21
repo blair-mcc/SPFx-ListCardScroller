@@ -27,12 +27,17 @@ const PropertyPaneFieldReorderableListHost: React.FC<IReorderableListHostProps> 
   onChange
 }) => {
   const [selected, setSelected] = React.useState<string[]>(selectedKeys);
-
+  
   // Toggle checkbox selection
   const toggleField = (key: string): void => {
-    const updated = selected.includes(key)
-      ? selected.filter(k => k !== key)
-      : [...selected, key];
+    let updated: string[];
+
+    if (selected.includes(key)) {
+      updated = selected.filter(k => k !== key);
+    } else {
+      updated = [...selected, key];
+    }
+
     setSelected(updated);
     onChange(updated);
   };

@@ -6,7 +6,7 @@ export interface IPropertyPaneFieldReorderableListProps {
   label: string;
   options: IDropdownOption[];
   selectedKeys: string[];
-  onPropertyChange: (propertyPath: string, newValue: string[]) => void;
+  onPropertyChange: (propertyPath: string, oldValue: String[], newValue: string[]) => void;
 }
 
 export interface IPropertyPaneFieldReorderableListInternalProps

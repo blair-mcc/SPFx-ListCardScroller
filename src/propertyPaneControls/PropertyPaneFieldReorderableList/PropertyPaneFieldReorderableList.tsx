@@ -25,11 +25,13 @@ export function PropertyPaneFieldReorderableList(
         elem = domElement;
 
         const handleChange = (newValue: string[]) => {
-          properties.onPropertyChange(targetProperty, newValue);
+          const oldValue = properties.selectedKeys;
+          properties.onPropertyChange(targetProperty, oldValue, newValue);
           if (changeCallback) {
-            changeCallback(); // safe to call now
+            changeCallback();
           }
         };
+
 
         ReactDom.render(
           <PropertyPaneFieldReorderableListHost

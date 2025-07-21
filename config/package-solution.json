@@ -1,14 +1,14 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "sp-list-card-scroller-client-side-solution",
+    "name": "SharePoint List - Card View Side Scroller",
     "id": "d634feda-9147-482f-bafd-4ad3e45f6ab8",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,
     "developer": {
-      "name": "",
+      "name": "Blair McConnachie",
       "websiteUrl": "",
       "privacyUrl": "",
       "termsOfUseUrl": "",
@@ -16,10 +16,10 @@
     },
     "metadata": {
       "shortDescription": {
-        "default": "SPListCardScroller description"
+        "default": "Side Scrolling List Card View"
       },
       "longDescription": {
-        "default": "SPListCardScroller description"
+        "default": "SharePoint List - Card View Side Scroller is a side scrolling view for SharePoint lists, that formats the list items in a card view."
       },
       "screenshotPaths": [],
       "videoUrl": "",
@@ -27,8 +27,8 @@
     },
     "features": [
       {
-        "title": "sp-list-card-scroller Feature",
-        "description": "The feature that activates elements of the sp-list-card-scroller solution.",
+        "title": "SharePoint List - Card View Side Scroller Feature",
+        "description": "Deploy SharePoint List - Card View Side Scroller to all sites.",
         "id": "81cddd86-a929-4419-a72b-0462d10a99e9",
         "version": "1.0.0.0"
       }
