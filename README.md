@@ -4,7 +4,8 @@
 
 This custom SPFx Component turns any list into a simple card viewer in SharePoint without having to create and mess around with a gallery view on the list. It allows for minimal customisation in the fields selected, title field, as many description fields as you'd like, a footer and an optional image field. It uses a custom Property Pane Control (PropertyPaneFieldReorderableList) that allows for multi select and re-ordering.
 
-[picture of the solution in action, if possible]
+<img width="1226" height="491" alt="image" src="https://github.com/user-attachments/assets/efdedf71-d3fb-4fa9-b9ce-7777c5ad15f6" />
+
 
 ## Used SharePoint Framework Version
 
