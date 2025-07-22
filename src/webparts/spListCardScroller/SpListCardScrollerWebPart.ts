@@ -176,9 +176,12 @@ export default class ListCardScrollerWebPart extends BaseClientSideWebPart<IList
 }
 
 
-    private _onPropertyPaneChange(propertyPath: string, newValue: string[]): void {
+    private _onPropertyPaneChange(propertyPath: string, oldValue: string[], newValue: string[]): void {
+      if (JSON.stringify(oldValue) !== JSON.stringify(newValue)) {
         this.properties[propertyPath] = newValue;
+      }
     }
+
 
     public async onPropertyPaneFieldChanged(propertyPath: string, oldValue: any, newValue: any): Promise<void> {
         if (propertyPath === 'listTitle' && newValue !== oldValue) {
